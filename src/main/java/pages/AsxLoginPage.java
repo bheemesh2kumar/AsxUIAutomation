@@ -10,17 +10,32 @@ public class AsxLoginPage extends BasePage {
     @FindBy(id = "loginOrSignupLbl")
     private WebElement btnMainLogin;
 
-    @FindBy(id = "idToken1")
+    @FindBy(how = How.CSS, using = "input#idToken1")
     private WebElement txtBoxEmailID;
 
-    @FindBy(id = "idToken2")
+    @FindBy(how = How.CSS, using = "input#idToken2")
     private WebElement txtBoxPwd;
 
-    @FindBy(id = "loginButton_0")
+    @FindBy(how = How.CSS, using = "input#loginButton_0")
     private WebElement btnLoginCLick;
 
     @FindBy(id = "onetrust-accept-btn-handler")
     private WebElement btnAcceptAllCookies;
+
+    @FindBy(how = How.XPATH, using = "//iframe[@id='loginIframe']")
+    private WebElement iFrameElement;
+
+    @FindBy(how = How.CSS, using = "div[class='line-wrapper']>h1>span")
+    private WebElement lableASXHomePageAfterLoggedIn;
+
+    public WebElement getLableASXHomePageAfterLoggedIn() {
+        return lableASXHomePageAfterLoggedIn;
+    }
+
+    public WebElement getiFrameElement() {
+        return iFrameElement;
+    }
+
 
     public WebElement getBtnAcceptAllCookies() {
         return btnAcceptAllCookies;
@@ -56,16 +71,23 @@ public class AsxLoginPage extends BasePage {
 
 
     public void userLogsintoAsx(String userName, String Pwd) {
-        getBtnMainLogin().click();
         getTxtBoxEmailID().sendKeys(userName);
         getTxtBoxPwd().sendKeys(Pwd);
         getBtnLoginCLick().click();
-
     }
 
 
     public void clickonAcceptCookiesButton() {
         getBtnAcceptAllCookies().click();
+    }
+
+
+    public Boolean isUserLoggedIntoHomePage(String Lablename) {
+        Boolean flag = false;
+        if (getLableASXHomePageAfterLoggedIn().getText().equalsIgnoreCase(Lablename)) {
+            flag = true;
+        }
+        return flag;
     }
 
 
