@@ -11,20 +11,7 @@ import org.testng.annotations.Test;
 import pages.AsxLoginPage;
 import utilities.AppUtilites;
 
-public class AsxLoginPageTest extends FrameWorkInit {
-
-    AppUtilites appUtilites;
-    AsxLoginPage asxLoginPage;
-
-
-    @BeforeMethod
-    public void setup() throws Exception {
-        browserInit(BrowserTypes.chrome);
-        DriverContext.browserBase.lauchUrl("https://www2.asx.com.au/");
-        DriverContext.browserBase.maximise();
-        appUtilites = new AppUtilites();
-        asxLoginPage = getInstance(AsxLoginPage.class);
-    }
+public class AsxLoginPageTest extends BaseTest {
 
 
     @Test
@@ -40,29 +27,13 @@ public class AsxLoginPageTest extends FrameWorkInit {
 
     @Test
     public void userlogsIntoAsxApplicationTest() throws Exception {
-        DriverContext.driver.manage().deleteAllCookies();
-        appUtilites.waitforElement(DriverContext.driver, asxLoginPage.getBtnAcceptAllCookies(), 10);
-        asxLoginPage.clickonAcceptCookiesButton();
-        asxLoginPage.getBtnMainLogin().click();
-        appUtilites.waitforFrameElement(DriverContext.driver, asxLoginPage.getiFrameElement(),
-                25);
-        appUtilites.waitforElement(DriverContext.driver, asxLoginPage.getTxtBoxEmailID(),
-                70);
+
         asxLoginPage.userLogsintoAsx("manu.bheemesh@gmail.com",
                 "@satyarao1");
         appUtilites.waitforElement(DriverContext.driver, asxLoginPage.getLableASXHomePageAfterLoggedIn(),
                 30);
         Boolean flag = asxLoginPage.isUserLoggedIntoHomePage("bheemesh");
         Assert.assertTrue(flag, "user is not logged into Homepage");
-
-    }
-
-
-    @AfterMethod
-    public void tearDown() {
-
-        DriverContext.driver.quit();
-
     }
 
 

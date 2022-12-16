@@ -1,9 +1,11 @@
 package pages;
 
 import base.BasePage;
+import base.DriverContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import utilities.AppUtilites;
 
 public class AsxLoginPage extends BasePage {
 
@@ -71,6 +73,13 @@ public class AsxLoginPage extends BasePage {
 
 
     public void userLogsintoAsx(String userName, String Pwd) {
+        AppUtilites.waitforElement(DriverContext.driver, getBtnAcceptAllCookies(), 10);
+        clickonAcceptCookiesButton();
+        getBtnMainLogin().click();
+        AppUtilites.waitforFrameElement(DriverContext.driver, getiFrameElement(),
+                40);
+        AppUtilites.waitforElement(DriverContext.driver, getTxtBoxEmailID(),
+                100);
         getTxtBoxEmailID().sendKeys(userName);
         getTxtBoxPwd().sendKeys(Pwd);
         getBtnLoginCLick().click();

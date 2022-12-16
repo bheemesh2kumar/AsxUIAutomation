@@ -38,13 +38,13 @@ public class AppUtilites {
     }
 
 
-    public void waitforElement(WebDriver driver, WebElement element, int timeout) {
+    public static void waitforElement(WebDriver driver, WebElement element, int timeout) {
 
         new WebDriverWait(driver, Duration.ofSeconds(timeout)).ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitforFrameElement(WebDriver driver, WebElement element, int timeout) {
+    public static void waitforFrameElement(WebDriver driver, WebElement element, int timeout) {
 
         new WebDriverWait(driver, Duration.ofSeconds(timeout)).ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
